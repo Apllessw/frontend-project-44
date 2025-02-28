@@ -9,4 +9,7 @@ publish:
 
 make lint:
 	npx eslint .
+
+make brain-even:
+	node bin/brain-even.js
 	
