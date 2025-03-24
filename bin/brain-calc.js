@@ -1,59 +1,34 @@
 #!/usr/bin/env node
-
 import readlineSync from 'readline-sync';
+import game, { generateRandNum, calculateExpression, checkAnswer } from '../src/cli.js';
 
-const operations = ['+', '-', '*'];
+const calcGame = () => {
+  const name = game();
 
-const generateExpression = () => {
-  const num1 = Math.floor(Math.random() * 50) + 1;
-  const num2 = Math.floor(Math.random() * 50) + 1;
+  const operations = ['+', '-', '*'];
 
-  const operation = operations[Math.floor(Math.random() * operations.length)];
+  let sum = 0;
 
-  return { num1, num2, operation };
-};
+  console.log('What is the result of the expression?');
 
-const calculateExpression = ({ num1, num2, operation }) => {
-  switch (operation) {
-    case '+': return num1 + num2;
-    case '-': return num1 - num2;
-    case '*': return num1 * num2;
-    default: throw new Error(`Unknown operator: ${operation}`);
-  }
-};
+  while (sum < 3) {
+    const num1 = generateRandNum(1, 15);
+    const num2 = generateRandNum(1, 15);
 
-const playGame = () => {
-  let score = 0;
-  let attempts = 3;
+    const operation = operations[Math.floor(Math.random() * operations.length)];
 
-  console.log('Welcome to the math game!');
-  const playerName = readlineSync.question('Enter your name: ');
-  console.log(`Hello, ${playerName}! Let's start the game.`);
+    console.log(`Question: ${num1} ${operation} ${num2}`);
+    const userAnswer = Number(readlineSync.question('Your answer is: '));
+    const correctAnswer = Number(calculateExpression(num1, num2, operation));
 
-  while (attempts > 0) {
-    const { num1, num2, operation } = generateExpression();
-
-    const userAnswer = parseFloat(readlineSync.question(`Question: ${num1} ${operation} ${num2} = `));
-
-    const correctAnswer = calculateExpression({ num1, num2, operation });
-
-    if (isNaN(userAnswer)) {
-      console.log('Invalid input. Please enter a number.');
-      continue;
-    }
-
-    if (userAnswer === correctAnswer) {
-      console.log('Correct! Well done!');
-      score++;
+    if (checkAnswer(Number(userAnswer), correctAnswer, name)) {
+      sum += 1;
     } else {
-      console.log(`Wrong! The correct answer was: ${correctAnswer}.`);
+      return;
     }
-
-    attempts--;
-    console.log(`You have ${attempts} attempt(s) left.\n`);
   }
 
-  console.log(`Game over! Your final score is: ${score}.\nThanks for playing, ${playerName}!`);
+  console.log(`Congratulations, ${name}!`);
 };
 
-playGame();
+calcGame();
