@@ -15,7 +15,7 @@ const playGame = () => {
     console.log(`Question ${randomNumResult}`);
     const userAnswer = readlineSync.question('Your answer: ');
     if (correctAnswer === userAnswer) {
-      console.log('Correct');
+      console.log('Correct!');
       countSum += 1;
     } else {
       console.log('\'yes\' is wrong answer ;(. Correct answer was \'no\'.');
