@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import readlineSync from 'readline-sync';
-import game from '../src/cli.js';
+import game from './src/cli.js';
 
 const playGame = () => {
   let countSum = 0;
