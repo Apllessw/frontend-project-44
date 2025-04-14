@@ -12,7 +12,7 @@ const playGame = () => {
     const randomNumResult = randomNum();
     const correctAnswer = isEven(randomNumResult) ? 'yes' : 'no';
 
-    console.log(`question ${randomNumResult}`);
+    console.log(`Question: ${randomNumResult}`);
     const userAnswer = readlineSync.question('You answer: ');
     if (correctAnswer === userAnswer) {
       console.log('Correct');
