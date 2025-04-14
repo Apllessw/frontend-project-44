@@ -4,6 +4,7 @@ import game, { generateProgression, checkAnswer } from '../src/cli.js';
 
 const progressionGame = () => {
   const userName = game();
+  console.log('What number is missing in the progression?');
 
   let isWin = 0;
   while (isWin < 3) {
