@@ -23,7 +23,7 @@ const playGame = () => {
       return;
     }
   } while (countSum < 3);
-  console.log(`Congratulations, ${name}`);
+  console.log(`Congratulations, ${name}!`);
 };
 
 playGame();
